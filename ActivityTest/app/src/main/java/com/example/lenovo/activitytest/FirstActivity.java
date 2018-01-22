@@ -1,7 +1,10 @@
 package com.example.lenovo.activitytest;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +35,21 @@ public class FirstActivity extends AppCompatActivity {
         return true;
     }
 
+
+    //处理返回结果，要重写该函数
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 1:
+                if (resultCode == RESULT_OK){
+                    String returnedData = data.getStringExtra("data_return");
+                    Log.d("FirstActivity",returnedData);
+                }
+                break;
+            default:
+        }
+    }
+
     //主布局，放一个button在中间，并提供点击事件
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +60,48 @@ public class FirstActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(FirstActivity.this, "You cliked Button1",
-                        Toast.LENGTH_SHORT).show();
 
+                //8 返回数据
+                Intent uitent = new Intent(FirstActivity.this,SecondActivity.class);
+                startActivityForResult(intent,1);
+
+                /*7 传递数据给SecondActivity
+                String data = "Hello SecondActivity";
+                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+                intent.putExtra("extra_data",data);
+                startActivity(intent);
+                */
+
+
+                /* 6  弹出拨号界面 Intent.ACTION_DIAL是android系统的内置动作
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:10010"));
+                startActivity(intent);
+                */
+
+                /* 5    选择调用系统自带浏览器或者打开button3
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                //用parse将字符串解析成一个Uri对象
+                intent.setData(Uri.parse("http://www.baidu.com"));
+                startActivity(intent);
+                */
+
+                /* 4    Intent 隐式地启动第二个活动
+                Intent intent = new Intent("com.example.activitytest.ACTION_START");
+                intent.addCategory("com.example.activitytest.MY_CATEGORY");
+                startActivity(intent);
+                */
+
+                /* 3  inten显式启动第二个活动
+                Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
+                startActivity(intent);
+                */
+
+                //1
+                //Toast.makeText(FirstActivity.this, "You cliked Button1",
+                //        Toast.LENGTH_SHORT).show();
+
+                //2
                 //修改为点击button销毁活动
                 //finish();
             }
