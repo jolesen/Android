@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class FirstActivity extends AppCompatActivity {
+public class FirstActivity extends BasicActivity {
 
     //在res中创建了menu菜单文件后，重写该方法创建菜单
     @Override
@@ -54,6 +54,8 @@ public class FirstActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("FirstActivity",this.toString());
+
         //加载布局
         setContentView(R.layout.first_layout);
         Button button1 = (Button) findViewById(R.id.button_1);
@@ -61,9 +63,22 @@ public class FirstActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
 
-                //8 返回数据
+
+
+                //10
+                Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
+                startActivity(intent);
+
+
+                /*9 standard模式
+                Intent intent = new Intent(FirstActivity.this,FirstActivity.class);
+                startActivity(intent);
+                */
+
+                /*8 返回数据
                 Intent uitent = new Intent(FirstActivity.this,SecondActivity.class);
                 startActivityForResult(intent,1);
+                */
 
                 /*7 传递数据给SecondActivity
                 String data = "Hello SecondActivity";

@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class SecondActivity extends AppCompatActivity {
+public class SecondActivity extends BasicActivity {
 
     @Override
     public void onBackPressed() {
@@ -27,10 +27,18 @@ public class SecondActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
+
+                /*9
+                Intent intent = new Intent(SecondActivity.this,FirstActivity.class);
+                startActivity(intent);
+                */
+                /*8
                 Intent intent = new Intent();//构造这个intent为了传递数据
                 intent.putExtra("data_return","Hello FirstActivity ");
                 setResult(RESULT_OK，intent);//向上一个活动回传数据，第一个参数为向上一个活动返回处理结果
                 finish();//销毁当前活动
+                */
             }
         });
 
